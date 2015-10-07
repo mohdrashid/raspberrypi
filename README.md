@@ -1,5 +1,7 @@
 # raspberrypi
-This project is designed to help 
+This project was started to create a module which can be used to help raspberry pi communicate with servers located in the internet, allowing it access data of other devices or pass collected data to server so that others can make use of it.
+<br>
+<br>
 Use the sudo command below to move created header file [server_io.py] to python library folder in Raspberry Pi
 <br>
 <br>
