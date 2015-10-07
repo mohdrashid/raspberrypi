@@ -5,7 +5,6 @@ Use the sudo command below to move created header file [server_io.py] to python 
 <br>
 <b>sudo mv ~/place_where_its_located/server_io.py /usr/lib/pythonx.y</b>
 <br>
-<br>
 replace x.y with persion number of your python compiler
 <br>
 
