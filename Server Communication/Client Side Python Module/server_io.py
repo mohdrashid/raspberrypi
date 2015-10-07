@@ -8,7 +8,7 @@ Usage  => get_ip('wlan0'): to get ip of wireless lan
 Syntax +> get_mac(): returns the mac address of raspberry pi
 
 Syntax +> set_server_ip(server_adds)
-Usage  => set_server_ip('10.25.33.5') : call only if server ip differs from the default one
+Usage  => set_server_ip('http://10.25.33.5') : call only if server ip differs from the default one
 ---------------------------------------------------------------------------------------------------
 Syntax +>register_pi(path) or register_pi(path,parameter)
 Usage  =>
@@ -108,7 +108,7 @@ def register_pi(path,parameter=None): #Registers raspberry pi with server
         #Server takes parameters uid and server_add to register/update a device details in the server.
     if(parameter==None):
         parameter={'mac':mac,'ip':get_ip('eth0')}
-    post_response=requests.post(url='http://'+ server_add+path,data=parameter)
+    post_response=requests.post(url=server_add+path,data=parameter)
         #Using post methode offered by request library to write values to the server
     if(post_response.text=='OK'): #If server returns OK message go inside this block
         return True
@@ -116,7 +116,7 @@ def register_pi(path,parameter=None): #Registers raspberry pi with server
 
 def get_id(path,parameter={'mac':mac}): #Returns id of the raspberry pi as registered in the server
         #server uses uuid to uniquely identify each unit as server_add address can vary
-    post_response=requests.post(url='http://'+ server_add+path,data=parameter)
+    post_response=requests.post(url=server_add+path,data=parameter)
     global identity
     identity = post_response.text
     return identity
@@ -127,7 +127,7 @@ def register_port(path,port,direction,parameter=None): #Registers rasberry pi po
     if parameter==None:
         parameter={'id':identity,'port':port,'io':direction} 
         #server takes parameters id,port and io to register/update a port in the server
-    post_response=requests.post(url='http://'+ server_add + path
+    post_response=requests.post(url=server_add + path
                                 ,data=parameter)
     if(post_response.text=='OK'):
         return True
@@ -137,7 +137,7 @@ def read_data(path,ids,port,parameter=None): #Reads port data from server using 
 #can be used to read port data from a different device using id of that device
     if parameter==None:
         parameter={'id':ids,'port':port}
-    post_response=requests.post(url='http://'+ server_add +path,data=parameter)
+    post_response=requests.post(url=server_add +path,data=parameter)
     if(post_response.text=='Error'):
         print "Error Reading value !!!!\nNo record exists for the given port number"
     else:
@@ -146,7 +146,7 @@ def read_data(path,ids,port,parameter=None): #Reads port data from server using 
 def write_data(path,ids,port,data,parameter=None):#Sends data of the given port of the given id to the serve 
     if parameter==None:
         parameter={'id':ids,'port':port,'data':data}
-    post_response=requests.post(url='http://'+ server_add +path,data=parameter)
+    post_response=requests.post(url=server_add +path,data=parameter)
     if(post_response.text=='OK'):
         return True
     return False
