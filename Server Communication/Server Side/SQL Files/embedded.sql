@@ -60,7 +60,7 @@ ALTER TABLE `raspberry`
 -- Indexes for table `raspberry_port`
 --
 ALTER TABLE `raspberry_port`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`,`port_no`);
 
 --
 -- AUTO_INCREMENT for dumped tables
